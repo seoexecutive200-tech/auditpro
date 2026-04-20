@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Website Audit Report</title>
+</head>
+<body style="margin:0;padding:0;background-color:#F9FAFB;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#4B5563;-webkit-font-smoothing:antialiased;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#F9FAFB;padding:24px 0;">
+<tr><td align="center" style="padding:0 12px;">
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px;width:100%;background-color:#FFFFFF;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.06);">
+
+<!-- ================= HEADER ================= -->
+<tr>
+<td style="background-color:#6C2BD9;background-image:linear-gradient(90deg,#6C2BD9 0%,#8B5CF6 100%);padding:24px 28px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+<td valign="middle" width="80" style="padding-right:14px;">
+<img src="{{agencyLogo}}" alt="{{agencyName}}" height="50" style="display:block;height:50px;max-height:50px;width:auto;border:0;outline:none;text-decoration:none;background:#FFFFFF;padding:4px 8px;border-radius:6px;" />
+</td>
+<td valign="middle" align="left" style="color:#FFFFFF;font-size:18px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:0.3px;">
+{{agencyName}}
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<!-- ================= HERO ================= -->
+<tr>
+<td align="center" style="padding:40px 32px 28px 32px;background-color:#FFFFFF;">
+<h1 style="margin:0 0 14px 0;font-size:26px;line-height:1.3;color:#111827;font-weight:800;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;">Website Audit Report Ready</h1>
+<p style="margin:0 0 10px 0;font-size:14px;color:#4B5563;line-height:1.6;text-align:left;">Hi {{clientName}},</p>
+<p style="margin:0 0 28px 0;font-size:14px;color:#4B5563;line-height:1.6;text-align:left;">We've completed a full audit of <strong style="color:#111827;">{{websiteUrl}}</strong>. Here's what we found:</p>
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tr><td align="center">
+<div style="width:120px;height:120px;border-radius:60px;background-color:{{gradeColor}};color:#FFFFFF;font-size:54px;font-weight:800;text-align:center;line-height:120px;margin:0 auto;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;">{{grade}}</div>
+</td></tr></table>
+
+<p style="margin:14px 0 0 0;font-size:11px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1.5px;">Overall Score</p>
+<p style="margin:4px 0 0 0;font-size:30px;color:#111827;font-weight:800;">{{overallScore}}<span style="font-size:18px;color:#9CA3AF;font-weight:500;">/100</span></p>
+<p style="margin:8px 0 0 0;font-size:12px;color:#9CA3AF;">Audited on {{auditDate}}</p>
+</td>
+</tr>
+
+<!-- ================= SCORES ROW ================= -->
+<tr>
+<td style="background-color:#F9FAFB;padding:22px 20px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+<td width="20%" valign="top" style="padding:3px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;border:1px solid #E5E7EB;border-radius:10px;">
+<tr><td align="center" style="padding:12px 4px;">
+<div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;font-weight:700;">SEO</div>
+<div style="font-size:22px;color:#6C2BD9;font-weight:800;line-height:1;">{{seoScore}}</div>
+</td></tr>
+</table>
+</td>
+<td width="20%" valign="top" style="padding:3px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;border:1px solid #E5E7EB;border-radius:10px;">
+<tr><td align="center" style="padding:12px 4px;">
+<div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;font-weight:700;">Perf</div>
+<div style="font-size:22px;color:#6C2BD9;font-weight:800;line-height:1;">{{performanceScore}}</div>
+</td></tr>
+</table>
+</td>
+<td width="20%" valign="top" style="padding:3px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;border:1px solid #E5E7EB;border-radius:10px;">
+<tr><td align="center" style="padding:12px 4px;">
+<div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;font-weight:700;">Security</div>
+<div style="font-size:22px;color:#6C2BD9;font-weight:800;line-height:1;">{{securityScore}}</div>
+</td></tr>
+</table>
+</td>
+<td width="20%" valign="top" style="padding:3px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;border:1px solid #E5E7EB;border-radius:10px;">
+<tr><td align="center" style="padding:12px 4px;">
+<div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;font-weight:700;">A11Y</div>
+<div style="font-size:22px;color:#6C2BD9;font-weight:800;line-height:1;">{{accessibilityScore}}</div>
+</td></tr>
+</table>
+</td>
+<td width="20%" valign="top" style="padding:3px;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#FFFFFF;border:1px solid #E5E7EB;border-radius:10px;">
+<tr><td align="center" style="padding:12px 4px;">
+<div style="font-size:9px;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;font-weight:700;">Mobile</div>
+<div style="font-size:22px;color:#6C2BD9;font-weight:800;line-height:1;">{{mobileScore}}</div>
+</td></tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<!-- ================= TOP ISSUES ================= -->
+<tr>
+<td style="padding:32px 32px 10px 32px;background-color:#FFFFFF;">
+<h2 style="margin:0 0 18px 0;font-size:18px;color:#111827;font-weight:700;border-left:4px solid #6C2BD9;padding-left:12px;line-height:1.3;">Top Issues Found</h2>
+{{issuesHtml}}
+</td>
+</tr>
+
+<!-- ================= WHAT THIS MEANS ================= -->
+<tr>
+<td style="padding:22px 32px 32px 32px;background-color:#FFFFFF;">
+<h2 style="margin:0 0 12px 0;font-size:18px;color:#111827;font-weight:700;border-left:4px solid #6C2BD9;padding-left:12px;line-height:1.3;">What This Means For Your Business</h2>
+<p style="margin:0 0 18px 0;font-size:14px;color:#4B5563;line-height:1.65;">{{summaryText}}</p>
+<p style="margin:0 0 10px 0;font-size:13px;color:#111827;font-weight:700;">Top 3 Recommendations</p>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr><td style="padding-left:4px;">
+<ul style="margin:0;padding:0 0 0 20px;font-size:13px;color:#4B5563;line-height:1.75;">
+{{recsHtml}}
+</ul>
+</td></tr>
+</table>
+</td>
+</tr>
+
+<!-- ================= CTA ================= -->
+<tr>
+<td align="center" style="background-color:#6C2BD9;background-image:linear-gradient(90deg,#6C2BD9 0%,#8B5CF6 100%);padding:44px 32px;">
+<h2 style="margin:0 0 12px 0;color:#FFFFFF;font-size:24px;font-weight:800;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;">Ready to Fix These Issues?</h2>
+<p style="margin:0 0 26px 0;color:#FFFFFF;font-size:14px;line-height:1.6;opacity:0.92;">The full detailed report is attached to this email as a PDF.</p>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tr><td align="center" style="border-radius:999px;background:#FFFFFF;">
+<a href="{{agencyWebsite}}" style="display:inline-block;padding:14px 38px;font-size:14px;font-weight:700;color:#6C2BD9;text-decoration:none;border-radius:999px;border:2px solid #FFFFFF;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;">Book a Free Consultation</a>
+</td></tr></table>
+</td>
+</tr>
+
+<!-- ================= FOOTER ================= -->
+<tr>
+<td align="center" style="background-color:#111827;padding:30px 32px;">
+<p style="margin:0 0 8px 0;color:#FFFFFF;font-size:15px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;">{{agencyName}}</p>
+<p style="margin:0 0 4px 0;color:#9CA3AF;font-size:12px;">{{agencyContact}}</p>
+<p style="margin:0 0 4px 0;color:#9CA3AF;font-size:12px;">{{agencyPhone}}</p>
+<p style="margin:0 0 16px 0;font-size:12px;"><a href="{{agencyWebsite}}" style="color:#A78BFA;text-decoration:none;">{{agencyWebsite}}</a></p>
+<p style="margin:0 0 10px 0;color:#9CA3AF;font-size:11px;line-height:1.6;">This report was prepared by {{preparedBy}} from {{agencyName}}.</p>
+<p style="margin:0 0 8px 0;color:#6B7280;font-size:10px;line-height:1.5;">If you no longer wish to receive these emails, please reply and let us know.</p>
+<p style="margin:0;color:#6B7280;font-size:10px;">&copy; {{year}} {{agencyName}}. All rights reserved.</p>
+</td>
+</tr>
+
+</table>
+
+</td></tr>
+</table>
+</body>
+</html>

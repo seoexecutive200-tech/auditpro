@@ -1,0 +1,38 @@
+/* ============ DARK MODE OVERRIDES ============ */
+body.dark {
+  --bg-main: #1A1030;
+  --bg-section: #0F0A1A;
+  --bg-subtle: #231645;
+  --border: #2D1F4E;
+  --border-focus: #8B5CF6;
+  --text-heading: #F3EEFF;
+  --text-body: #C4B5FD;
+  --text-muted: #7C6FAA;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.4);
+  --primary-bg: #2D1F4E;
+  --success-bg: #052E16;
+  --error-bg: #450A0A;
+  --warning-bg: #431407;
+  --info-bg: #0C1A3A;
+}
+
+body.dark .card                { box-shadow: none; }
+body.dark .form-input          { background: #231645; color: var(--text-heading); }
+body.dark .form-input::placeholder { color: var(--text-muted); }
+body.dark table                { background: var(--bg-main); }
+body.dark thead th             { background: #231645; }
+body.dark .modal               { background: #1A1030; }
+body.dark .toast               { background: #2D1F4E; color: var(--text-heading); }
+body.dark .sidebar             { background: #1A1030; }
+body.dark .top-header          { background: #1A1030; }
+body.dark .tabs                { background: #231645; }
+body.dark .tab.active          { background: #1A1030; }
+body.dark .dropzone            { background: #231645; }
+body.dark .dropzone:hover      { background: #2D1F4E; }
+body.dark .btn-secondary       { background: #231645; border-color: var(--border); }
+body.dark .nav-item.active     { background: #2D1F4E; }
+body.dark input,
+body.dark select,
+body.dark textarea             { color-scheme: dark; }

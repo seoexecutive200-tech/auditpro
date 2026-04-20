@@ -1,0 +1,9 @@
+node_modules/
+.env
+backend/db/*.db
+db/*.db
+*.db
+pdfs/
+*.log
+sim-browser.js
+test-*.js

@@ -1,0 +1,287 @@
+/* ============ MOBILE RESPONSIVE (≤768px) ============ */
+@media (max-width: 768px) {
+  * { max-width: 100%; box-sizing: border-box; }
+  html, body { overflow-x: hidden; }
+
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100vh;
+    z-index: 200;
+    transition: left 0.3s ease;
+    box-shadow: none;
+  }
+
+  .sidebar.open {
+    left: 0;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 199;
+    display: none;
+  }
+
+  .sidebar-overlay.open { display: block; }
+
+  .main-wrapper { width: 100%; }
+
+  .hamburger { display: flex !important; }
+
+  .main-content {
+    padding: 16px;
+    padding-bottom: 80px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .form-grid-2 { grid-template-columns: 1fr; }
+
+  .modal    { padding: 20px; }
+  .modal-lg { max-width: 100%; }
+
+  .bottom-tab-bar {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-main);
+    border-top: 1px solid var(--border);
+    z-index: 100;
+    padding: 8px 0;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
+
+  .tab-bar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 4px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+
+  .tab-bar-item.active { color: var(--primary); }
+  .tab-bar-item svg    { width: 20px; height: 20px; }
+
+  .steps          { flex-wrap: wrap; gap: 8px; }
+  .step-connector { display: none; }
+
+  h1 { font-size: 22px; }
+  h2 { font-size: 18px; }
+
+  .toast-container { bottom: 90px; right: 12px; left: 12px; }
+  .toast           { min-width: unset; }
+
+  .table-wrapper           { border-radius: var(--radius-md); }
+  thead th:nth-child(n+5)  { display: none; }
+  tbody td:nth-child(n+5)  { display: none; }
+
+  .bulk-item-client { display: none; }
+}
+
+/* ============ VERY SMALL SCREENS (≤480px) ============ */
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .modal {
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    max-width: 100%;
+  }
+}
+
+/* ============ MOBILE POLISH (≤768px) ============ */
+@media (max-width: 768px) {
+  /* a) General minimums — prevent iOS autozoom on inputs and meet tap-target spec */
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="url"],
+  input[type="search"],
+  input[type="time"],
+  input[type="tel"],
+  select.select,
+  select,
+  textarea,
+  .input {
+    min-height: 48px;
+    font-size: 16px; /* iOS won't autozoom at 16px+ */
+  }
+  .btn,
+  button.btn {
+    min-height: 48px;
+    font-size: 14px;
+  }
+  body, p, li, td, th, .section-sub { font-size: 14px; }
+
+  /* b) Modal on mobile — edge-to-edge, bottom sheet, 16px inner padding, stacked footer */
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .modal {
+    max-width: 100%;
+    width: 100%;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    padding: 16px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-footer,
+  .modal .footer,
+  .modal-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+  .modal-footer .btn,
+  .modal .footer .btn,
+  .modal-actions .btn {
+    width: 100%;
+  }
+
+  /* c) Lead Finder results — table rows render as cards */
+  #lfResultsTable,
+  #lfResultsTable thead,
+  #lfResultsTable tbody,
+  #lfResultsTable tr,
+  #lfResultsTable td {
+    display: block;
+    width: 100%;
+  }
+  #lfResultsTable thead { display: none; }
+  #lfResultsTable tr {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    background: var(--bg);
+  }
+  #lfResultsTable td {
+    border: none;
+    padding: 4px 0;
+    text-align: left;
+  }
+  #lfResultsTable td:first-child {
+    display: inline-block;
+    width: auto;
+    margin-right: 8px;
+  }
+  #lfResultsTable td:nth-child(2) {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  #lfResultsTable td:nth-child(3) {
+    color: var(--muted, #6B7280);
+    font-size: 13px;
+    word-break: break-all;
+  }
+  #lfResultsTable td:nth-child(6) {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(108, 43, 217, 0.12);
+    color: #6C2BD9;
+    font-size: 11px;
+    margin-top: 4px;
+  }
+
+  /* d) Auto Pipeline form + progress */
+  #view-pipeline .card { padding: 16px !important; }
+  #view-pipeline input,
+  #view-pipeline select {
+    width: 100%;
+  }
+  /* email-count preset buttons: 2x2 grid */
+  #plcCountPresets {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  #plcCountPresets .btn { width: 100%; }
+  /* live counter chips stack vertically */
+  #plStep2 > div[style*="flex-wrap:wrap"] {
+    flex-direction: column !important;
+    gap: 6px !important;
+    align-items: stretch !important;
+  }
+  #plStep2 .chip {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 14px;
+  }
+  /* step tracker — tighter spacing */
+  .pl-step { font-size: 13px; }
+  .pl-step .pl-detail { display: block; margin-left: 26px; }
+
+  /* e) Lead CRM filter bar stacks */
+  #view-lead-crm .filters-row,
+  #view-lead-crm .filters,
+  #view-lead-crm .field-row,
+  #view-lead-crm .card-body > div[style*="grid"],
+  #view-lead-crm .card-body > div[style*="flex"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  #view-lead-crm .field { width: 100%; }
+
+  /* CRM: hide desktop table, rely on the card list that already exists */
+  #lcTable, .tbl-wrap.desktop-only { display: none !important; }
+  #lcCardsWrap { display: block !important; padding: 8px !important; }
+  #lcCardsWrap .lead-card {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: var(--bg);
+  }
+  #lcCardsWrap .lead-card .name {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  #lcCardsWrap .lead-card .lead-status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+
+  /* f) Pipeline / campaign history table keeps horizontal scroll */
+  #plHistoryBody td,
+  #plHistoryBody th {
+    white-space: nowrap;
+  }
+
+  /* Extra safety: no horizontal overflow anywhere on small screens */
+  .card,
+  section.view,
+  .main-content,
+  .modal { overflow-x: hidden; }
+
+  /* CRM save modal: niche creator grids responsive */
+  #scrmEmojiGrid, #scrmColorGrid { flex-wrap: wrap !important; }
+}

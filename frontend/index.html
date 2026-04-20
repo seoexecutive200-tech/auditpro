@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AuditPro — Sign in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="assets/css/dark.css" />
+<link rel="stylesheet" href="assets/css/mobile.css" />
+<style>
+  :root {
+    --primary: #6C2BD9;
+    --primary-2: #8B5CF6;
+    --accent: #A78BFA;
+    --hover: #E9D5FF;
+    --text: #111827;
+    --text-body: #4B5563;
+    --muted: #9CA3AF;
+    --bg: #FFFFFF;
+    --card: #FFFFFF;
+    --section: #F9FAFB;
+    --border: #E5E7EB;
+    --input-bg: #F9FAFB;
+    --input-text: #111827;
+    --shadow-lg: 0 20px 50px rgba(17, 24, 39, 0.08);
+    --shadow-focus: 0 0 0 4px rgba(108, 43, 217, 0.16);
+    --critical: #DC2626;
+  }
+  body.dark {
+    --text: #E9D5FF;
+    --text-body: #A78BFA;
+    --muted: #6B5B8E;
+    --bg: #0F0A1A;
+    --card: #1A1030;
+    --section: #1A1030;
+    --border: #2D1F4E;
+    --input-bg: #2D1F4E;
+    --input-text: #F5F3FF;
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text-body);
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  input { font-family: inherit; }
+
+  .page {
+    display: flex;
+    min-height: 100vh;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: fadeIn 0.55s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ====================== LEFT PANEL ====================== */
+  .left {
+    flex: 0 0 60%;
+    background: linear-gradient(135deg, #6C2BD9 0%, #8B5CF6 100%);
+    position: relative;
+    padding: 48px 56px;
+    display: flex;
+    flex-direction: column;
+    color: #FFFFFF;
+    overflow: hidden;
+    min-height: 100vh;
+  }
+  .left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(600px circle at 20% 20%, rgba(255,255,255,0.08), transparent 50%),
+      radial-gradient(500px circle at 80% 80%, rgba(255,255,255,0.06), transparent 50%);
+    pointer-events: none;
+  }
+  .circles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .circles span {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    animation: float 18s infinite ease-in-out;
+  }
+  .circles span:nth-child(1) { width: 240px; height: 240px; top: 12%; left: 6%; animation-duration: 22s; }
+  .circles span:nth-child(2) { width: 160px; height: 160px; top: 62%; left: 10%; animation-duration: 16s; animation-delay: -4s; background: rgba(255,255,255,0.05); }
+  .circles span:nth-child(3) { width: 320px; height: 320px; top: 40%; right: -60px; animation-duration: 26s; animation-delay: -8s; background: rgba(255,255,255,0.04); }
+  .circles span:nth-child(4) { width: 120px; height: 120px; top: 8%; right: 18%; animation-duration: 14s; animation-delay: -2s; background: rgba(255,255,255,0.07); }
+  .circles span:nth-child(5) { width: 80px;  height: 80px;  top: 78%; right: 28%; animation-duration: 20s; animation-delay: -6s; }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(28px, -36px) scale(1.08); }
+  }
+
+  .logo-wrap {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-wrap img {
+    height: 45px;
+    width: auto;
+    background: rgba(255,255,255,0.95);
+    padding: 6px 10px;
+    border-radius: 10px;
+    display: block;
+  }
+  .logo-wrap .brand-name {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #FFFFFF;
+  }
+
+  .left-content {
+    position: relative;
+    z-index: 2;
+    margin: auto 0;
+    max-width: 520px;
+  }
+  .left-content h1 {
+    font-size: 44px;
+    line-height: 1.1;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.8px;
+    margin-bottom: 16px;
+  }
+  .left-content .tagline {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 32px;
+    max-width: 460px;
+  }
+  .features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.92);
+    font-weight: 500;
+  }
+  .features .check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .features .check svg { width: 12px; height: 12px; }
+
+  .mock-widget {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 16px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    max-width: 420px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+  }
+  .mock-widget .mw-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #16A34A, #22C55E);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    flex-shrink: 0;
+    box-shadow: 0 6px 16px rgba(22, 163, 74, 0.35);
+  }
+  .mock-widget .mw-info { flex: 1; min-width: 0; }
+  .mock-widget .mw-url {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 2px;
+  }
+  .mock-widget .mw-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+  }
+  .mock-widget .mw-mini {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.78);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .mock-widget .mw-mini span strong { color: #FFFFFF; }
+  .mock-widget .mw-sep { color: rgba(255,255,255,0.3); }
+
+  /* ====================== RIGHT PANEL ====================== */
+  .right {
+    flex: 1;
+    background: var(--card);
+    padding: 48px 56px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: background-color 0.35s ease;
+    min-height: 100vh;
+  }
+  .theme-toggle {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--section);
+    border: 1px solid var(--border);
+    color: var(--text-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
+  }
+  .theme-toggle:hover { background: var(--hover); color: var(--primary); }
+  body.dark .theme-toggle:hover { background: var(--border); color: var(--accent); }
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .sun { display: none; }
+  body.dark .theme-toggle .moon { display: none; }
+  body.dark .theme-toggle .sun { display: block; }
+
+  .form-wrap {
+    margin: auto 0;
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .form-wrap h2 {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    transition: color 0.35s ease;
+  }
+  .form-wrap .subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 36px;
+    transition: color 0.35s ease;
+  }
+
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-body);
+    margin-bottom: 6px;
+    letter-spacing: 0.1px;
+    transition: color 0.35s ease;
+  }
+  body.dark .field label { color: var(--accent); }
+
+  .input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .input-wrap .icon {
+    position: absolute;
+    left: 14px;
+    color: var(--muted);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    transition: color 0.2s ease;
+  }
+  .input-wrap input {
+    width: 100%;
+    height: 48px;
+    padding: 0 16px 0 44px;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--input-text);
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.35s ease, color 0.35s ease;
+  }
+  .input-wrap input::placeholder { color: var(--muted); }
+  .input-wrap input:focus {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-focus);
+  }
+  .input-wrap input:focus + .icon,
+  .input-wrap:focus-within .icon { color: var(--primary); }
+
+  .input-wrap.has-toggle input { padding-right: 44px; }
+  .pw-toggle {
+    position: absolute;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    border-radius: 6px;
+  }
+  .pw-toggle:hover { color: var(--primary); }
+  .pw-toggle svg { width: 18px; height: 18px; }
+  .pw-toggle .eye-off { display: none; }
+  .pw-toggle.showing .eye { display: none; }
+  .pw-toggle.showing .eye-off { display: block; }
+
+  .error-msg {
+    background: rgba(220, 38, 38, 0.08);
+    border: 1px solid rgba(220, 38, 38, 0.25);
+    color: var(--critical);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 14px;
+    display: none;
+  }
+  .error-msg.show { display: block; }
+
+  .btn-primary {
+    width: 100%;
+    height: 48px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #6C2BD9 0%, #8B5CF6 100%);
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 10px 28px rgba(108, 43, 217, 0.28);
+    transition: transform 0.1s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    margin-top: 6px;
+  }
+  .btn-primary:hover { filter: brightness(0.95); box-shadow: 0 14px 32px rgba(108, 43, 217, 0.34); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled { cursor: not-allowed; opacity: 0.85; }
+  .btn-primary.loading .label { display: none; }
+  .btn-primary .spinner { display: none; width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35); border-top-color: #FFFFFF; animation: spin 0.8s linear infinite; }
+  .btn-primary.loading .spinner { display: block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .forgot {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .forgot:hover { color: var(--primary); }
+  body.dark .forgot:hover { color: var(--accent); }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%      { transform: translateX(-8px); }
+    40%      { transform: translateX(8px); }
+    60%      { transform: translateX(-6px); }
+    80%      { transform: translateX(6px); }
+  }
+  .form-wrap.shake { animation: shake 0.45s ease-in-out; }
+
+  .version {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding-top: 24px;
+    transition: color 0.35s ease;
+  }
+
+  /* ====================== RESPONSIVE ====================== */
+  @media (max-width: 900px) {
+    .page { flex-direction: column; }
+    .left {
+      flex: 0 0 auto;
+      min-height: 220px;
+      padding: 28px 24px;
+      text-align: center;
+      align-items: center;
+    }
+    .left-content { margin: 0; }
+    .left-content h1 { font-size: 26px; margin-bottom: 10px; }
+    .left-content .tagline { font-size: 13px; margin: 0 auto 0 auto; max-width: 420px; }
+    .features, .mock-widget { display: none; }
+    .logo-wrap { justify-content: center; margin-bottom: 18px; }
+    .circles span:nth-child(3) { display: none; }
+
+    .right {
+      flex: 1;
+      padding: 40px 24px 24px 24px;
+      min-height: auto;
+    }
+    .theme-toggle { top: 16px; right: 16px; }
+    .form-wrap h2 { font-size: 24px; }
+    .form-wrap .subtitle { margin-bottom: 26px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ============ LEFT PANEL ============ -->
+  <section class="left" aria-hidden="true">
+    <div class="circles">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="logo-wrap">
+      <img src="https://chosenfirstai.com/wp-content/uploads/2026/03/Untitled-506-x-383-px.png" alt="AuditPro logo" />
+      <span class="brand-name">AuditPro</span>
+    </div>
+
+    <div class="left-content">
+      <h1>Audit Smarter.<br />Close Faster.</h1>
+      <p class="tagline">Generate professional website audit reports and send them to clients in minutes — not hours.</p>
+
+      <ul class="features">
+        <li>
+          <span class="check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          Real-time website analysis
+        </li>
+        <li>
+          <span class="check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          AI-powered recommendations
+        </li>
+        <li>
+          <span class="check">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          Automated client email delivery
+        </li>
+      </ul>
+
+      <div class="mock-widget">
+        <div class="mw-circle">87</div>
+        <div class="mw-info">
+          <div class="mw-url">Website</div>
+          <div class="mw-name">example.com</div>
+          <div class="mw-mini">
+            <span>SEO <strong>92</strong></span><span class="mw-sep">•</span>
+            <span>Perf <strong>84</strong></span><span class="mw-sep">•</span>
+            <span>Sec <strong>91</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RIGHT PANEL ============ -->
+  <section class="right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
+
+    <div class="form-wrap" id="formWrap">
+      <h2>Welcome back</h2>
+      <p class="subtitle">Sign in to your AuditPro account</p>
+
+      <div class="error-msg" id="errorMsg"></div>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="email">Email address</label>
+          <div class="input-wrap">
+            <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required />
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 5L2 7"/></svg>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input-wrap has-toggle">
+            <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required />
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <button type="button" class="pw-toggle" id="pwToggle" aria-label="Show password">
+              <svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a19.79 19.79 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a19.8 19.8 0 0 1-3.17 4.19M14.12 14.12a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn">
+          <span class="spinner"></span>
+          <span class="label">Sign in</span>
+        </button>
+
+        <a href="#" class="forgot" id="forgotLink">Forgot password?</a>
+      </form>
+    </div>
+
+    <div class="version">AuditPro v1.0</div>
+  </section>
+
+</div>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>

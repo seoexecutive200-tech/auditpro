@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(node -e \"require\\('./backend/db/database'\\).initDB\\(\\)\")",
+      "Bash(cp .env.example .env)",
+      "Bash(node backend/server.js)",
+      "Bash(curl *)",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const r=JSON.parse\\(d\\);console.log\\('reportId:',r.reportId\\);console.log\\('overall:',r.overallScore,r.grade\\);console.log\\('scores:',r.scores\\);console.log\\('issues:',r.issues?.length\\);console.log\\('recs:',r.recommendations?.length\\);console.log\\('pagespeed err:',r.pagespeedData?.errors\\);console.log\\('first 2 recs:',r.recommendations?.slice\\(0,2\\).map\\(x=>x.title\\)\\);}\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"require\\('./backend/routes/pdf'\\); require\\('./backend/utils/pdfGenerator'\\); console.log\\('All modules load OK'\\);\")",
+      "Bash(node -e \"require\\('./backend/utils/queue'\\); require\\('./backend/routes/bulk'\\); require\\('./backend/routes/reports'\\); require\\('./backend/server'\\); console.log\\('OK'\\)\")",
+      "Bash(node --check C:/Users/swaru/auditpro/frontend/assets/js/__TRACKED_VAR__.js)",
+      "Bash(node backend/test-connection.js)",
+      "Bash(npm start *)",
+      "Bash(node -e \"let d='';process.stdin.on\\('data',c=>d+=c\\).on\\('end',\\(\\)=>{const r=JSON.parse\\(d\\);console.log\\('reports:', r.reports.length, 'total:', r.total\\)}\\)\")",
+      "Bash(node --check frontend/assets/js/__TRACKED_VAR__.js)",
+      "Bash(node sim.js)",
+      "Bash(node sim-browser.js)",
+      "Bash(node verify-globals.js)",
+      "Bash(node verify-bugfixes.js)",
+      "Bash(netstat -ano)",
+      "Bash(node verify-settings-save.js)",
+      "Bash(node -e \"require\\('./backend/utils/aiEmailGenerator'\\); console.log\\('aiEmailGenerator OK'\\)\")",
+      "Bash(PORT=3099 node backend/server.js)",
+      "Bash(echo \"pid=$!\")",
+      "Bash(python -c \"import sys,json; s=json.load\\(sys.stdin\\); print\\('groq_api_key present:', 'groq_api_key' in s, '| value:', repr\\(s.get\\('groq_api_key'\\)\\)\\)\")",
+      "Bash(python -c \"import json; print\\(json.load\\(open\\('loginresp.json'\\)\\)['token']\\)\")",
+      "Bash(python -c \"import json; r=json.load\\(open\\('put.json'\\)\\); print\\('PUT ok:', r.get\\('success'\\), '| groq:', r.get\\('settings',{}\\).get\\('groq_api_key'\\)\\)\")"
+    ]
+  }
+}

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Website Audit Report</title>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;color:#4B5563;font-size:12px;line-height:1.5;background:#FFFFFF;-webkit-print-color-adjust:exact;">
+
+<!-- ============================================================= -->
+<!-- PAGE 1 — COVER                                                  -->
+<!-- ============================================================= -->
+<div style="width:794px;page-break-after:always;">
+
+  <table width="794" cellpadding="0" cellspacing="0" border="0" style="background-color:#6C2BD9;background-image:linear-gradient(90deg,#6C2BD9 0%,#8B5CF6 100%);">
+    <tr>
+      <td style="padding:40px 48px 30px 48px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td align="left" valign="middle" width="60%">
+              <img src="{{agencyLogo}}" height="46" style="display:block;height:46px;background-color:#FFFFFF;padding:4px 10px;border-radius:6px;border:0;">
+            </td>
+            <td align="right" valign="middle" style="color:#FFFFFF;font-size:16px;font-weight:bold;font-family:Arial,Helvetica,sans-serif;">
+              {{agencyName}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" style="padding:70px 48px 90px 48px;">
+        <div style="font-size:40px;font-weight:bold;color:#FFFFFF;margin-bottom:14px;font-family:Arial,Helvetica,sans-serif;">Website Audit Report</div>
+        <div style="font-size:13px;color:#FFFFFF;letter-spacing:3px;text-transform:uppercase;">Premium Performance &amp; SEO Analysis</div>
+      </td>
+    </tr>
+  </table>
+
+  <table width="794" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td align="center" style="padding:50px 48px 20px 48px;">
+        <div style="font-size:20px;font-weight:bold;color:#111827;margin-bottom:8px;word-break:break-all;">{{websiteUrl}}</div>
+        <div style="font-size:13px;color:#9CA3AF;margin-bottom:32px;">Audited on {{auditDate}}</div>
+
+        <table cellpadding="0" cellspacing="0" border="0" align="center">
+          <tr>
+            <td align="center" valign="middle" width="150" height="150" style="width:150px;height:150px;background-color:{{gradeColor}};color:#FFFFFF;font-size:80px;font-weight:bold;text-align:center;vertical-align:middle;border-radius:12px;line-height:150px;">
+              {{grade}}
+            </td>
+          </tr>
+        </table>
+
+        <div style="font-size:11px;color:#9CA3AF;text-transform:uppercase;letter-spacing:2px;margin-top:22px;">Overall Score</div>
+        <div style="font-size:34px;font-weight:bold;color:#111827;margin-top:4px;">{{overallScore}}<span style="font-size:18px;color:#9CA3AF;font-weight:normal;">&nbsp;/&nbsp;100</span></div>
+
+        <div style="font-size:12px;color:#6B7280;margin-top:40px;">Prepared by <strong style="color:#111827;">{{preparedBy}}</strong></div>
+      </td>
+    </tr>
+  </table>
+
+  <table width="794" cellpadding="0" cellspacing="0" border="0" style="margin-top:60px;">
+    <tr>
+      <td style="padding:0 48px;">
+        <div style="height:2px;background-color:#6C2BD9;margin-bottom:14px;"></div>
+        <div style="font-size:11px;color:#9CA3AF;text-align:center;">
+          {{agencyName}} &nbsp;&middot;&nbsp; {{agencyContact}} &nbsp;&middot;&nbsp; {{agencyPhone}} &nbsp;&middot;&nbsp; {{agencyWebsite}}
+        </div>
+        <div style="font-size:9px;color:#9CA3AF;text-align:center;margin-top:6px;">Page 1 of 8</div>
+      </td>
+    </tr>
+  </table>
+
+</div>
+
+<!-- ============================================================= -->
+<!-- PAGE 2 — EXECUTIVE SUMMARY                                      -->
+<!-- ============================================================= -->
+<div style="width:794px;page-break-after:always;padding:40px 48px;box-sizing:border-box;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:20px;">
+    <tr>
+      <td style="border-left:4px solid #6C2BD9;padding-left:12px;">
+        <div style="font-size:24px;font-weight:bold;color:#111827;">Executive Summary</div>
+      </td>
+    </tr>
+  </table>
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:20px;">
+    <tr>
+      <td width="20%" valign="top" style="padding:4px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #E5E7EB;border-radius:8px;background-color:#F9FAFB;">
+          <tr><td align="center" style="padding:14px 6px;">
+            <div style="font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">SEO</div>
+            <div style="font-size:22px;font-weight:bold;color:{{seoColor}};">{{seoScore}}</div>
+            <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">/ 100</div>
+          </td></tr>
+        </table>
+      </td>
+      <td width="20%" valign="top" style="padding:4px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #E5E7EB;border-radius:8px;background-color:#F9FAFB;">
+          <tr><td align="center" style="padding:14px 6px;">
+            <div style="font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Performance</div>
+            <div style="font-size:22px;font-weight:bold;color:{{performanceColor}};">{{performanceScore}}</div>
+            <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">/ 100</div>
+          </td></tr>
+        </table>
+      </td>
+      <td width="20%" valign="top" style="padding:4px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #E5E7EB;border-radius:8px;background-color:#F9FAFB;">
+          <tr><td align="center" style="padding:14px 6px;">
+            <div style="font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Security</div>
+            <div style="font-size:22px;font-weight:bold;color:{{securityColor}};">{{securityScore}}</div>
+            <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">/ 100</div>
+          </td></tr>
+        </table>
+      </td>
+      <td width="20%" valign="top" style="padding:4px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #E5E7EB;border-radius:8px;background-color:#F9FAFB;">
+          <tr><td align="center" style="padding:14px 6px;">
+            <div style="font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">A11y</div>
+            <div style="font-size:22px;font-weight:bold;color:{{accessibilityColor}};">{{accessibilityScore}}</div>
+            <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">/ 100</div>
+          </td></tr>
+        </table>
+      </td>
+      <td width="20%" valign="top" style="padding:4px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #E5E7EB;border-radius:8px;background-color:#F9FAFB;">
+          <tr><td align="center" style="padding:14px 6px;">
+            <div style="font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Mobile</div>
+            <div style="font-size:22px;font-weight:bold;color:{{mobileColor}};">{{mobileScore}}</div>
+            <div style="font-size:10px;color:#9CA3AF;margin-top:2px;">/ 100</div>
+          </td></tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F9FAFB;border:1px solid #E5E7EB;border-left:4px solid #6C2BD9;border-radius:8px;margin-bottom:22px;">
+    <tr><td style="padding:16px 20px;">
+      <div style="font-size:13px;font-weight:bold;color:#111827;margin-bottom:6px;">Plain English Summary</div>
+      <div style="font-size:12px;color:#4B5563;line-height:1.65;">{{summaryText}}</div>
+    </td></tr>
+  </table>
+
+  <div style="font-size:12px;font-weight:bold;color:#111827;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Top Critical Issues</div>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:22px;">
+    {{topCriticalRowsHtml}}
+  </table>
+
+  <div style="font-size:12px;font-weight:bold;color:#111827;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Quick Wins</div>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    {{quickWinsRowsHtml}}
+  </table>
+
+  <div style="height:2px;background-color:#6C2BD9;margin-top:32px;"></div>
+  <div style="font-size:9px;color:#9CA3AF;text-align:right;margin-top:6px;">Page 2 of 8</div>
+</div>
+
+<!-- ============================================================= -->
+<!-- PAGE 3 — SEO ANALYSIS                                           -->
+<!-- ============================================================= -->
+<div style="width:794px;page-break-after:always;padding:40px 48px;box-sizing:border-box;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:20px;">
+    <tr>
+      <td style="border-left:4px solid #6C2BD9;padding-left:12px;">
+        <div style="font-size:24px;font-weight:bold;color:#111827;">SEO Analysis</div>
+      </td>
+      <td align="right">
+        <span style="display:inline-block;padding:6px 14px;background-color:{{seoBgColor}};color:{{seoColor}};font-size:13px;font-weight:bold;border-radius:20px;">{{seoScore}} / 100</span>
+      </td>
+    </tr>
+  </table>
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="1" bordercolor="#E5E7EB" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background-color:#F9FAFB;">
+        <th align="left" style="padding:10px 14px;font-size:10px;text-transform:uppercase;color:#6B7280;letter-spacing:0.8px;width:55%;">Check</th>
+        <th align="left" style="padding:10px 14px;font-size:10px;text-transform:uppercase;color:#6B7280;letter-spacing:0.8px;">Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{seoChecksRowsHtml}}
+    </tbody>
+  </table>
+
+  <div style="height:2px;background-color:#6C2BD9;margin-top:32px;"></div>
+  <div style="font-size:9px;color:#9CA3AF;text-align:right;margin-top:6px;">Page 3 of 8</div>
+</div>
+
+<!-- ============================================================= -->
+<!-- PAGE 4 — PERFORMANCE                                            -->
+<!-- ============================================================= -->
+<div style="width:794px;page-break-after:always;padding:40px 48px;box-sizing:border-box;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:20px;">
+    <tr>
+      <td style="border-left:4px solid #6C2BD9;padding-left:12px;">
+        <div style="font-size:24px;font-weight:bold;color:#111827;">Performance</div>
+      </td>
+      <td align="right">
+        <span style="display:inline-block;padding:6px 14px;background-color:{{performanceBgColor}};color:{{performanceColor}};font-size:13px;font-weight:bold;border-radius:20px;">{{performanceScore}} / 100</span>
+      </td>
+    </tr>
+  </table>
+
+  <div style="font-size:12px;font-weight:bold;color:#111827;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Core Web Vitals</div>
+  <table width="100%" cellpadding="0" cellspacing="0" border="1" bordercolor="#E5E7EB" style="border-collapse:collapse;margin-bottom:22px;">
+    <thead>
+      <tr style="background-color:#F9FAFB;">
+        <th align="left" style="padding:10px 14px;font-size:10px;text-transform:uppercase;color:#6B7280;letter-spacing:0.8px;">Metric</th>
+        <th align="left" style="padding:10px 14px;font-size:10px;text-transform:uppercase;color:#6B7280;letter-spacing:0.8px;">Value</th>
+        <th align="left" style="padding:10px 14px;font-size:10px;text-transform:uppercase;color:#6B7280;letter-spacing:0.8px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{coreWebVitalsRowsHtml}}
+    </tbody>
+  </table>
+
+  <div style="font-size:12px;font-weight:bold;color:#111827;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Desktop vs Mobile</div>
+  <table width="100%" cellpadding="0" cellspacing="0" border="1" bordercolor="#E5E7EB" style="border-collapse:collapse;background-color:#F9FAFB;">
+    <tr>
+      <td width="50%" style="padding:16px;">
+        <div style="font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Desktop Performance</div>
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#E5E7EB;border-radius:999px;">
+          <tr>
+            <td width="{{performanceScore}}%" style="background-color:#6C2BD9;height:12px;border-radius:999px;"></td>
+            <td></td>
+          </tr>
+        </table>
+        <div style="font-size:14px;font-weight:bold;color:#111827;margin-top:6px;">{{performanceScore}} / 100</div>
+      </td>
+      <td width="50%" style="padding:16px;border-left:1px solid #E5E7EB;">
+        <div style="font-size:10px;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Mobile Performance</div>
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#E5E7EB;border-radius:999px;">
+          <tr>
+            <td width="{{mobileScore}}%" style="background-color:#6C2BD9;height:12px;border-radius:999px;"></td>
+            <td></td>
+          </tr>
+        </table>
+        <div style="font-size:14px;font-weight:bold;color:#111827;margin-top:6px;">{{mobileScore}} / 100</div>
+      </td>
+    </tr>
+  </table>
+
+  <div style="height:2px;background-color:#6C2BD9;margin-top:32px;"></div>
+  <div style="font-size:9px;color:#9CA3AF;text-align:right;margin-top:6px;">Page 4 of 8</div>
+</div>
+
+<!-- ============================================================= -->
+<!-- PAGE 5 — SECURITY, ACCESSIBILITY, MOBILE                        -->
+<!-- ============================================================= -->
+<div style="width:794px;page-break-after:always;padding:40px 48px;box-sizing:border-box;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:20px;">
+    <tr>
+      <td style="border-left:4px solid #6C2BD9;padding-left:12px;">
+        <div style="font-size:24px;font-weight:bold;color:#111827;">Security, Accessibility &amp; Mobile</div>
+      </td>
+    </tr>
+  </table>
+
+  <div style="font-size:12px;font-weight:bold;color:#111827;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">
+    Security &nbsp;&middot;&nbsp; <span style="color:{{securityColor}};">{{securityScore}} / 100</span>
+  </div>
+  <table width="100%" cellpadding="0" cellspacing="0" border="1" bordercolor="#E5E7EB" style="border-collapse:collapse;margin-bottom:22px;">
+    <tbody>
+      {{securityChecksRowsHtml}}
+    </tbody>
+  </table>
+
+  <div style="font-size:12px;font-weight:bold;color:#111827;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">
+    Accessibility &nbsp;&middot;&nbsp; <span style="color:{{accessibilityColor}};">{{accessibilityScore}} / 100</span>
+  </div>
+  <table width="100%" cellpadding="0" cellspacing="0" border="1" bordercolor="#E5E7EB" style="border-collapse:collapse;margin-bottom:22px;">
+    <tbody>
+      {{accessibilityIssuesRowsHtml}}
+    </tbody>
+  </table>
+
+  <div style="font-size:12px;font-weight:bold;color:#111827;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">
+    Mobile &nbsp;&middot;&nbsp; <span style="color:{{mobileColor}};">{{mobileScore}} / 100</span>
+  </div>
+  <table width="100%" cellpadding="0" cellspacing="0" border="1" bordercolor="#E5E7EB" style="border-collapse:collapse;">
+    <tbody>
+      {{mobileChecksRowsHtml}}
+    </tbody>
+  </table>
+
+  <div style="height:2px;background-color:#6C2BD9;margin-top:32px;"></div>
+  <div style="font-size:9px;color:#9CA3AF;text-align:right;margin-top:6px;">Page 5 of 8</div>
+</div>
+
+<!-- ============================================================= -->
+<!-- PAGE 6 — ISSUES & RECOMMENDATIONS                               -->
+<!-- ============================================================= -->
+<div style="width:794px;page-break-after:always;padding:40px 48px;box-sizing:border-box;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;">
+    <tr>
+      <td style="border-left:4px solid #6C2BD9;padding-left:12px;">
+        <div style="font-size:24px;font-weight:bold;color:#111827;">Issues &amp; Recommendations</div>
+      </td>
+    </tr>
+  </table>
+
+  <div style="font-size:12px;color:#6B7280;margin-bottom:14px;">
+    Showing <strong style="color:#DC2626;">{{criticalCount}} critical</strong>,
+    <strong style="color:#B45309;">{{warningCount}} warnings</strong>,
+    <strong style="color:#16A34A;">{{passCount}} passed</strong>.
+  </div>
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="1" bordercolor="#E5E7EB" style="border-collapse:collapse;">
+    <thead>
+      <tr style="background-color:#F9FAFB;">
+        <th align="left" style="padding:9px 12px;font-size:9px;text-transform:uppercase;color:#6B7280;letter-spacing:0.6px;width:13%;">Category</th>
+        <th align="left" style="padding:9px 12px;font-size:9px;text-transform:uppercase;color:#6B7280;letter-spacing:0.6px;width:24%;">Issue</th>
+        <th align="left" style="padding:9px 12px;font-size:9px;text-transform:uppercase;color:#6B7280;letter-spacing:0.6px;width:10%;">Severity</th>
+        <th align="left" style="padding:9px 12px;font-size:9px;text-transform:uppercase;color:#6B7280;letter-spacing:0.6px;width:10%;">Impact</th>
+        <th align="left" style="padding:9px 12px;font-size:9px;text-transform:uppercase;color:#6B7280;letter-spacing:0.6px;width:10%;">Difficulty</th>
+        <th align="left" style="padding:9px 12px;font-size:9px;text-transform:uppercase;color:#6B7280;letter-spacing:0.6px;">Fix</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{issuesTableRowsHtml}}
+    </tbody>
+  </table>
+
+  <div style="height:2px;background-color:#6C2BD9;margin-top:32px;"></div>
+  <div style="font-size:9px;color:#9CA3AF;text-align:right;margin-top:6px;">Page 6 of 8</div>
+</div>
+
+<!-- ============================================================= -->
+<!-- PAGE 7 — COMPETITOR                                             -->
+<!-- ============================================================= -->
+<div style="width:794px;page-break-after:always;padding:40px 48px;box-sizing:border-box;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:20px;">
+    <tr>
+      <td style="border-left:4px solid #6C2BD9;padding-left:12px;">
+        <div style="font-size:24px;font-weight:bold;color:#111827;">Competitor Analysis</div>
+      </td>
+    </tr>
+  </table>
+
+  {{competitorSectionHtml}}
+
+  <div style="height:2px;background-color:#6C2BD9;margin-top:32px;"></div>
+  <div style="font-size:9px;color:#9CA3AF;text-align:right;margin-top:6px;">Page 7 of 8</div>
+</div>
+
+<!-- ============================================================= -->
+<!-- PAGE 8 — CTA + FOOTER                                           -->
+<!-- ============================================================= -->
+<div style="width:794px;padding:40px 48px;box-sizing:border-box;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:100px;">
+    <tr>
+      <td align="center">
+        <div style="font-size:36px;font-weight:bold;color:#111827;margin-bottom:14px;">Ready to Fix These Issues?</div>
+        <div style="font-size:14px;color:#6B7280;max-width:440px;margin:0 auto 32px auto;line-height:1.6;">Our team can implement every one of these recommendations for you &mdash; from technical SEO to Core Web Vitals tuning to security hardening.</div>
+
+        <table cellpadding="0" cellspacing="0" border="0" align="center">
+          <tr>
+            <td style="background-color:#6C2BD9;background-image:linear-gradient(90deg,#6C2BD9 0%,#8B5CF6 100%);border-radius:999px;">
+              <a href="{{agencyWebsite}}" style="display:inline-block;padding:16px 42px;font-size:14px;font-weight:bold;color:#FFFFFF;text-decoration:none;">Book a Free Consultation</a>
+            </td>
+          </tr>
+        </table>
+
+        <div style="font-size:13px;color:#4B5563;margin-top:48px;">
+          <div style="font-weight:bold;color:#111827;font-size:15px;margin-bottom:8px;">{{agencyName}}</div>
+          <div style="margin-bottom:4px;">{{agencyContact}}</div>
+          <div style="margin-bottom:4px;">{{agencyPhone}}</div>
+          <div>{{agencyWebsite}}</div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:80px;">
+    <tr>
+      <td>
+        <div style="height:2px;background-color:#6C2BD9;margin-bottom:10px;"></div>
+        <div style="font-size:10px;color:#9CA3AF;text-align:center;">
+          Report generated by {{agencyName}} &nbsp;&middot;&nbsp; {{auditDate}} &nbsp;&middot;&nbsp; Confidential
+        </div>
+        <div style="font-size:9px;color:#9CA3AF;text-align:center;margin-top:6px;">Page 8 of 8</div>
+      </td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>
