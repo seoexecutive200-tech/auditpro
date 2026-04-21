@@ -117,14 +117,11 @@ router.post('/save-results', requireAdmin, enforceUsageLimits('lead'), (req, res
 
     const tenantId = req.tenantId;
 
-    // Per-lead SQL check against all URL variants (normalized, raw, with http/https prefix)
-    // so duplicates are caught even when historical rows were saved in un-normalized form.
-    const findExisting = db.prepare(`
-      SELECT id FROM leads
-      WHERE tenant_id = ?
-        AND website IN (?, ?, ?, ?)
-      LIMIT 1
-    `);
+    // Only check the `leads` table for duplicates — never touch search history.
+    // Inserts always store the normalized URL, so a single-column compare suffices.
+    const findExisting = db.prepare(
+      'SELECT id FROM leads WHERE website = ? AND tenant_id = ? LIMIT 1'
+    );
 
     const delay1 = Number(getSetting('follow_up_delay_1')) || 3;
     // Allow explicit opt-out via scheduleFollowUps=false; otherwise fall back to tenant setting.
@@ -160,13 +157,7 @@ router.post('/save-results', requireAdmin, enforceUsageLimits('lead'), (req, res
         const normalized = normalizeUrl(rawWebsite);
 
         if (normalized) {
-          const dup = findExisting.get(
-            tenantId,
-            normalized,
-            rawWebsite,
-            'http://' + normalized,
-            'https://' + normalized
-          );
+          const dup = findExisting.get(normalized, tenantId);
           if (dup) {
             skipped += 1;
             continue;

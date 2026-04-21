@@ -38,6 +38,10 @@
   let lfJobId = null;
   let lfPollTimer = null;
   let lfResults = [];
+  // Mirror of lfResults under the name used by handleSendToBulk/saveToCRM
+  // so the in-memory array can be matched by index/email when pulling the
+  // checked rows out of the DOM.
+  let currentSearchResults = [];
   let lfSelected = new Set();
   let lfNichesCache = null;
   let lfUsersCache = null;
@@ -324,6 +328,7 @@
   function renderResults(result) {
     document.getElementById('lfProgressCard').style.display = 'none';
     lfResults = result.results || [];
+    currentSearchResults = lfResults;
     lfSelected = new Set(lfResults.map((_, i) => i));
     console.log('[LeadFinder] renderResults:', {
       leads: lfResults.length,
@@ -431,14 +436,14 @@
       body.innerHTML = lfResults.map((l, i) => {
         const leadData = esc(JSON.stringify({
           website: l.website || '',
-          businessName: l.businessName || '',
+          businessName: l.businessName || l.business_name || '',
           email: l.email || '',
           phone: l.phone || '',
-          source: l.source || '',
+          source: l.source || 'crawler',
           contactName: l.contactName || '',
         }));
         return `
-        <tr data-idx="${i}" data-lead="${leadData}">
+        <tr data-idx="${i}" data-index="${i}" data-email="${esc(l.email || '')}" data-lead="${leadData}">
           <td><input type="checkbox" class="lf-checkbox" data-idx="${i}" checked /></td>
           <td><div style="font-weight:700;color:var(--text);">${esc(l.businessName || '—')}</div>${l.contactName ? `<div style="font-size:11px;color:var(--muted);">${esc(l.contactName)}</div>` : ''}</td>
           <td><a href="${esc(l.website || '#')}" target="_blank" rel="noopener" style="color:var(--primary);">${esc((l.website || '').replace(/^https?:\/\//, '').slice(0, 40))}</a></td>
@@ -484,22 +489,41 @@
     return '';
   }
 
+  // Pull the selected leads out of the results table using three strategies,
+  // in order of reliability:
+  //   1. data-index — O(1) lookup into the in-memory results array
+  //   2. data-email — fall back to a search by email
+  //   3. data-lead  — parse the embedded JSON snapshot as a last resort
   function getSelectedLeads() {
+    const checkedBoxes = document.querySelectorAll(
+      '#lfResultsBody input[type="checkbox"]:checked'
+    );
+    console.log('[leads] Checked boxes:', checkedBoxes.length);
+    console.log('[leads] Current results:', currentSearchResults.length);
+
     const selected = [];
-    document.querySelectorAll('#lfResultsBody tr').forEach(row => {
-      const checkbox = row.querySelector('input[type="checkbox"]');
-      if (checkbox && checkbox.checked) {
-        const leadData = row.dataset.lead;
-        if (leadData) {
-          try {
-            selected.push(JSON.parse(leadData));
-          } catch (e) {
-            console.error('Error parsing lead data:', e);
-          }
-        } else {
-          const idx = parseInt(row.dataset.idx, 10);
-          const mem = lfResults[idx];
-          if (mem) selected.push(mem);
+    checkedBoxes.forEach((cb) => {
+      const row = cb.closest('tr');
+      if (!row) return;
+      const index = row.dataset.index;
+      const email = row.dataset.email;
+
+      if (index !== undefined && index !== '' && currentSearchResults[parseInt(index, 10)]) {
+        selected.push(currentSearchResults[parseInt(index, 10)]);
+        return;
+      }
+      if (email) {
+        const found = currentSearchResults.find((r) => r && r.email === email);
+        if (found) {
+          selected.push(found);
+          return;
+        }
+      }
+      if (row.dataset.lead) {
+        try {
+          selected.push(JSON.parse(row.dataset.lead));
+        } catch (e) {
+          console.error('[leads] Error parsing lead data:', e);
         }
       }
     });
@@ -704,12 +728,12 @@
 
   async function handleSendToBulk() {
     const selectedLeads = getSelectedLeads();
-    console.log('[sendToBulkAudit] selected leads:', selectedLeads.length);
+    console.log('[sendToBulkAudit] selected leads for bulk:', selectedLeads);
     if (!selectedLeads || selectedLeads.length === 0) {
       return Toast.error('No leads selected');
     }
 
-    const withEmail = selectedLeads.filter(l => l.email && l.website);
+    const withEmail = selectedLeads.filter(l => l && l.email && l.website);
     if (withEmail.length === 0) {
       return Toast.error('Selected leads need both a website and an email');
     }
