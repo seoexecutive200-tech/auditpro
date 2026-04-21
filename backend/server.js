@@ -12,6 +12,10 @@ const { initDB } = require('./db/database');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Trust the first proxy hop (Traefik) so req.ip / X-Forwarded-For resolve
+// correctly and express-rate-limit doesn't throw ERR_ERL_UNEXPECTED_X_FORWARDED_FOR.
+app.set('trust proxy', 1);
+
 // -------- Ensure pdfs/ exists at startup --------
 const pdfsDir = path.join(__dirname, '..', 'pdfs');
 if (!fs.existsSync(pdfsDir)) fs.mkdirSync(pdfsDir, { recursive: true });
