@@ -3,6 +3,10 @@ node_modules/
 backend/db/*.db
 db/*.db
 *.db
+db/*.db-shm
+db/*.db-wal
+backend/db/*.db-shm
+backend/db/*.db-wal
 pdfs/
 *.log
 sim-browser.js
