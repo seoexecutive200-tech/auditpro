@@ -428,8 +428,17 @@
 
     const body = document.getElementById('lfResultsBody');
     {
-      body.innerHTML = lfResults.map((l, i) => `
-        <tr data-idx="${i}">
+      body.innerHTML = lfResults.map((l, i) => {
+        const leadData = esc(JSON.stringify({
+          website: l.website || '',
+          businessName: l.businessName || '',
+          email: l.email || '',
+          phone: l.phone || '',
+          source: l.source || '',
+          contactName: l.contactName || '',
+        }));
+        return `
+        <tr data-idx="${i}" data-lead="${leadData}">
           <td><input type="checkbox" class="lf-checkbox" data-idx="${i}" checked /></td>
           <td><div style="font-weight:700;color:var(--text);">${esc(l.businessName || '—')}</div>${l.contactName ? `<div style="font-size:11px;color:var(--muted);">${esc(l.contactName)}</div>` : ''}</td>
           <td><a href="${esc(l.website || '#')}" target="_blank" rel="noopener" style="color:var(--primary);">${esc((l.website || '').replace(/^https?:\/\//, '').slice(0, 40))}</a></td>
@@ -437,7 +446,8 @@
           <td>${esc(l.phone || '—')}</td>
           <td>${sourceBadge(l.source)}</td>
           <td><button class="action-btn danger" data-remove="${i}" title="Remove"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></td>
-        </tr>`).join('');
+        </tr>`;
+      }).join('');
     }
 
     body.querySelectorAll('.lf-checkbox').forEach(cb => {
@@ -475,7 +485,25 @@
   }
 
   function getSelectedLeads() {
-    return [...lfSelected].sort((a,b)=>a-b).map(i => lfResults[i]).filter(Boolean);
+    const selected = [];
+    document.querySelectorAll('#lfResultsBody tr').forEach(row => {
+      const checkbox = row.querySelector('input[type="checkbox"]');
+      if (checkbox && checkbox.checked) {
+        const leadData = row.dataset.lead;
+        if (leadData) {
+          try {
+            selected.push(JSON.parse(leadData));
+          } catch (e) {
+            console.error('Error parsing lead data:', e);
+          }
+        } else {
+          const idx = parseInt(row.dataset.idx, 10);
+          const mem = lfResults[idx];
+          if (mem) selected.push(mem);
+        }
+      }
+    });
+    return selected;
   }
 
   async function loadNichesAndUsers() {
@@ -521,7 +549,7 @@
       .join('');
 
     const body = `
-      <div class="field"><label>Niche</label>
+      <div class="field"><label>Select Niche (optional)</label>
         <select class="select" id="scrmNiche">
           <option value="">— No niche —</option>
           ${renderNicheOpts(niches)}
@@ -675,24 +703,29 @@
   }
 
   async function handleSendToBulk() {
-    const leads = getSelectedLeads();
-    if (leads.length === 0) return Toast.error('Select at least one lead');
-    const withEmail = leads.filter(l => l.email && l.website);
+    const selectedLeads = getSelectedLeads();
+    console.log('[sendToBulkAudit] selected leads:', selectedLeads.length);
+    if (!selectedLeads || selectedLeads.length === 0) {
+      return Toast.error('No leads selected');
+    }
+
+    const withEmail = selectedLeads.filter(l => l.email && l.website);
     if (withEmail.length === 0) {
       return Toast.error('Selected leads need both a website and an email');
     }
-    console.log('[sendToBulkAudit] sending', { count: withEmail.length });
+
+    console.log('[sendToBulkAudit] sending to backend:', withEmail.length);
     try {
       const res = await API.post('/leads/send-to-bulk', { leads: withEmail });
-      console.log('[sendToBulkAudit] response', res);
+      console.log('[sendToBulkAudit] result:', res);
       const jobId = res && res.jobId;
       if (!jobId) throw new Error('No jobId returned');
-      Toast.success(`Bulk audit started for ${res.total || withEmail.length} site${(res.total || 1) === 1 ? '' : 's'}`);
+      Toast.success(`Bulk audit started for ${res.total || withEmail.length} site${(res.total || 1) === 1 ? '' : 's'}!`);
       sessionStorage.setItem('activeBulkJobId', jobId);
       Router.navigate('bulk-audit');
     } catch (err) {
-      console.error('[sendToBulkAudit] failed', err);
-      Toast.error('Bulk send failed: ' + err.message);
+      console.error('[sendToBulkAudit] error:', err);
+      Toast.error(err.message || 'Failed to start bulk audit');
     }
   }
 

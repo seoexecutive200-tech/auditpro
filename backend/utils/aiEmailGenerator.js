@@ -2,16 +2,22 @@ const Groq = require('groq-sdk');
 const { db } = require('../db/database');
 
 // Resolve the Groq API key: env var wins, then the global settings table.
-function getApiKey() {
-  if (process.env.GROQ_API_KEY) return process.env.GROQ_API_KEY;
+// Requires a length > 10 so we ignore accidentally-saved placeholders.
+async function getApiKey() {
+  if (process.env.GROQ_API_KEY && process.env.GROQ_API_KEY.length > 10) {
+    return process.env.GROQ_API_KEY;
+  }
   try {
     const row = db
       .prepare("SELECT value FROM settings WHERE key = 'groq_api_key'")
       .get();
-    return row && row.value ? row.value : null;
-  } catch (_err) {
-    return null;
+    if (row && row.value && row.value.length > 10) {
+      return row.value;
+    }
+  } catch (err) {
+    console.error('Error reading Groq key from DB:', err.message);
   }
+  return null;
 }
 
 function buildPrompt({ lead = {}, report = {}, tone = 'professional', goal = 'book_call' }) {
@@ -58,7 +64,7 @@ function stripFences(text) {
 }
 
 async function generateEmail(options = {}) {
-  const apiKey = options.apiKey || getApiKey();
+  const apiKey = options.apiKey || (await getApiKey());
   if (!apiKey) {
     throw new Error('Groq API key not configured (set GROQ_API_KEY or groq_api_key in settings)');
   }
@@ -177,11 +183,17 @@ function buildPersonalizedPrompt({
 }
 
 async function generatePersonalizedEmail(options = {}) {
-  const apiKey = options.apiKey || getApiKey();
+  const apiKey = options.apiKey || (await getApiKey());
+  console.log(
+    '🤖 Groq API key found:',
+    apiKey ? 'YES (' + apiKey.substring(0, 8) + '...)' : 'NO'
+  );
   if (!apiKey) {
+    console.log('⚠️ No Groq key — personalized email generation skipped');
     throw new Error('Groq API key not configured (set GROQ_API_KEY or groq_api_key in settings)');
   }
 
+  console.log('🤖 Generating AI email for:', options.businessName || '(unknown)');
   const client = new Groq({ apiKey });
   const prompt = buildPersonalizedPrompt(options);
 

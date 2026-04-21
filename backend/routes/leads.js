@@ -116,12 +116,15 @@ router.post('/save-results', requireAdmin, enforceUsageLimits('lead'), (req, res
     }
 
     const tenantId = req.tenantId;
-    const existingRows = db
-      .prepare(
-        "SELECT website FROM leads WHERE tenant_id = ? AND website IS NOT NULL AND website != ''"
-      )
-      .all(tenantId);
-    const existing = new Set(existingRows.map((r) => normalizeUrl(r.website)));
+
+    // Per-lead SQL check against all URL variants (normalized, raw, with http/https prefix)
+    // so duplicates are caught even when historical rows were saved in un-normalized form.
+    const findExisting = db.prepare(`
+      SELECT id FROM leads
+      WHERE tenant_id = ?
+        AND website IN (?, ?, ?, ?)
+      LIMIT 1
+    `);
 
     const delay1 = Number(getSetting('follow_up_delay_1')) || 3;
     // Allow explicit opt-out via scheduleFollowUps=false; otherwise fall back to tenant setting.
@@ -155,11 +158,20 @@ router.post('/save-results', requireAdmin, enforceUsageLimits('lead'), (req, res
       for (const l of leads) {
         const rawWebsite = l.website || '';
         const normalized = normalizeUrl(rawWebsite);
-        if (normalized && existing.has(normalized)) {
-          skipped += 1;
-          continue;
+
+        if (normalized) {
+          const dup = findExisting.get(
+            tenantId,
+            normalized,
+            rawWebsite,
+            'http://' + normalized,
+            'https://' + normalized
+          );
+          if (dup) {
+            skipped += 1;
+            continue;
+          }
         }
-        if (normalized) existing.add(normalized);
 
         const leadId = uuidv4();
         let result;
